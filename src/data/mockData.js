@@ -1,0 +1,41 @@
+export const mockData = {
+  parentName: "أم عمر",
+  childName: "عمر",
+  age: 6,
+  lastEvaluation: "1 مارس 2026",
+  stats: {
+    reading: {
+      title: "مستوى القراءة",
+      percentage: 70,
+      status: "جيد",
+      bgColor: "bg-[#F0FDF4]",
+      borderColor: "border-[#00C950]",
+      textColor: "text-[#00C950]",
+      barColor: "bg-[#00C950]",
+    },
+    writing: {
+      title: "مستوى الكتابة",
+      percentage: 20,
+      status: "يحتاج دعم",
+      bgColor: "bg-[#FEF2F2]",
+      borderColor: "border-[#FB2C36]",
+      textColor: "text-[#FB2C36]",
+      barColor: "bg-[#FB2C36]",
+    },
+    focus: {
+      title: "مستوى التركيز",
+      percentage: 50,
+      status: "متوسط",
+      bgColor: "bg-[#FEFCE8]",
+      borderColor: "border-[#F0B100]",
+      textColor: "text-[#FA9927]",
+      barColor: "bg-[#F0B100]",
+    },
+  },
+  chartData: [
+    { name: "أول تقييم", reading: 20, writing: 10, focus: 30 },
+    { name: "المنتصف", reading: 45, writing: 15, focus: 40 },
+    { name: "أخر تقييم", reading: 70, writing: 20, focus: 50 },
+  ],
+  lettersToPractice: ["ب", "ع", "ن", "س"],
+};
