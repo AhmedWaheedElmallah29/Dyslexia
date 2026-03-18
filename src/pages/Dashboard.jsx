@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import logoImage from "../assets/logoImage.png";
 import HeaderBanner from "../components/HeaderBanner";
 import StatsOverview from "../components/StatsOverview";
 import ProgressChart from "../components/ProgressChart";
@@ -12,14 +13,11 @@ import { AlertTriangle } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      setIsLoading(true);
-      setError(null);
-
       try {
         await new Promise((resolve) => setTimeout(resolve, 0));
         setData(mockData);
@@ -45,10 +43,13 @@ export default function Dashboard() {
       >
         <div className="w-full max-w-[90%] md:max-w-lg bg-[#FEF2F2] p-6 md:p-8 rounded-[30px] border border-[#FB2C36] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center text-center">
           <AlertTriangle className="w-12 h-12 md:w-16 md:h-16 text-[#FB2C36] mb-4" />
+
           <h2 className="text-xl md:text-[24px] font-bold text-[#FB2C36] mb-2">
             عذراً، فشل التحميل!
           </h2>
+
           <p className="text-base md:text-[18px] text-red-700">{error}</p>
+
           <button
             onClick={() => window.location.reload()}
             className="mt-6 px-6 md:px-8 py-3 bg-[#FB2C36] text-white text-sm md:text-base rounded-full font-bold hover:bg-red-600 transition"
@@ -64,16 +65,25 @@ export default function Dashboard() {
 
   return (
     <div
-      className="min-h-screen bg-[#FAEFE4] px-4 py-8 md:px-12 md:py-16 font-sans text-right"
+      className="min-h-screen bg-[#FAEFE4] pt-4.75 pb-8 md:pb-12 font-sans text-right"
       dir="rtl"
     >
-      <div className="max-w-350 mx-auto space-y-12 w-full">
+      <div className="max-w-350 mx-auto px-4 md:px-12 w-full space-y-8 md:space-y-12">
+        <div className="flex justify-start items-center">
+          <img
+            src={logoImage}
+            alt="شعار حروف"
+            className="w-55 h-27.5 object-contain"
+          />
+        </div>
+
         <HeaderBanner
           parentName={data.parentName}
           childName={data.childName}
           age={data.age}
           lastEvaluation={data.lastEvaluation}
         />
+
         <StatsOverview stats={data.stats} />
         <ProgressChart data={data.chartData} />
         <LettersPractice letters={data.lettersToPractice} />
