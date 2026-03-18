@@ -73,7 +73,7 @@ export default function Dashboard() {
           <img
             src={logoImage}
             alt="شعار حروف"
-            className="w-55 h-27.5 object-contain"
+            className="w-40 md:w-55 h-20 md:h-27.5 object-contain"
           />
         </div>
 
