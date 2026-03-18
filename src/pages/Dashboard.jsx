@@ -12,17 +12,16 @@ import { AlertTriangle } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
-        setIsLoading(true);
-        setError(null);
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
+        await new Promise((resolve) => setTimeout(resolve, 0));
         setData(mockData);
       } catch (err) {
         setError(err.message);

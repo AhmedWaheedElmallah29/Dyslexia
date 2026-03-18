@@ -22,23 +22,32 @@ export default function ProgressChart({ data }) {
           minWidth={0}
           minHeight={0}
         >
-          <LineChart data={data}>
+          <LineChart
+            data={data}
+            margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+          >
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
               stroke="#eee"
             />
+
             <XAxis
               dataKey="name"
               tick={{ fontSize: 20, fill: "#000", fontWeight: 500 }}
               axisLine={false}
               tickLine={false}
+              padding={{ left: 30, right: 4 }}
             />
+
             <YAxis
               tick={{ fontSize: 20, fill: "#000" }}
               axisLine={false}
               tickLine={false}
               domain={[0, 100]}
+              tickMargin={15}
+              width={10}
+              tickFormatter={(value) => `${value}%`}
             />
 
             <Tooltip
@@ -46,8 +55,12 @@ export default function ProgressChart({ data }) {
                 borderRadius: "15px",
                 border: "none",
                 boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                direction: "rtl",
+                textAlign: "right",
               }}
+              formatter={(value, name) => [`${value}%`, name]}
             />
+
             <Legend verticalAlign="top" height={40} iconType="circle" />
 
             <Line
