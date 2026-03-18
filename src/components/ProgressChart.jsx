@@ -5,18 +5,24 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Tooltip,
+  Legend,
 } from "recharts";
-import { mockData } from "../data/mockData";
 
-export default function ProgressChart() {
+export default function ProgressChart({ data }) {
   return (
     <div>
       <h2 className="text-[24px] font-bold text-black mb-6">
         تتبع التقدم خلال هذا الأسبوع
       </h2>
       <div className="h-72 w-full bg-white rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] p-8">
-          <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
-          <LineChart data={mockData.chartData}>
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+          minWidth={0}
+          minHeight={0}
+        >
+          <LineChart data={data}>
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
@@ -34,9 +40,20 @@ export default function ProgressChart() {
               tickLine={false}
               domain={[0, 100]}
             />
+
+            <Tooltip
+              contentStyle={{
+                borderRadius: "15px",
+                border: "none",
+                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              }}
+            />
+            <Legend verticalAlign="top" height={40} iconType="circle" />
+
             <Line
               type="monotone"
               dataKey="reading"
+              name="القراءة"
               stroke="#00C950"
               strokeWidth={4}
               dot={{ r: 6 }}
@@ -44,6 +61,7 @@ export default function ProgressChart() {
             <Line
               type="monotone"
               dataKey="writing"
+              name="الكتابة"
               stroke="#FB2C36"
               strokeWidth={4}
               dot={{ r: 6 }}
@@ -51,6 +69,7 @@ export default function ProgressChart() {
             <Line
               type="monotone"
               dataKey="focus"
+              name="التركيز"
               stroke="#FA9927"
               strokeWidth={4}
               dot={{ r: 6 }}
