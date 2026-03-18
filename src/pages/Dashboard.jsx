@@ -40,18 +40,18 @@ export default function Dashboard() {
   if (error) {
     return (
       <div
-        className="min-h-screen bg-[#FAEFE4] flex flex-col items-center justify-center font-sans text-right"
+        className="min-h-screen bg-[#FAEFE4] flex flex-col items-center justify-center font-sans px-4 text-right"
         dir="rtl"
       >
-        <div className="bg-[#FEF2F2] p-8 rounded-[30px] border border-[#FB2C36] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center max-w-lg text-center">
-          <AlertTriangle className="w-16 h-16 text-[#FB2C36] mb-4" />
-          <h2 className="text-[24px] font-bold text-[#FB2C36] mb-2">
+        <div className="w-full max-w-[90%] md:max-w-lg bg-[#FEF2F2] p-6 md:p-8 rounded-[30px] border border-[#FB2C36] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center text-center">
+          <AlertTriangle className="w-12 h-12 md:w-16 md:h-16 text-[#FB2C36] mb-4" />
+          <h2 className="text-xl md:text-[24px] font-bold text-[#FB2C36] mb-2">
             عذراً، فشل التحميل!
           </h2>
-          <p className="text-[18px] text-red-700">{error}</p>
+          <p className="text-base md:text-[18px] text-red-700">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-6 px-8 py-3 bg-[#FB2C36] text-white rounded-full font-bold hover:bg-red-600 transition"
+            className="mt-6 px-6 md:px-8 py-3 bg-[#FB2C36] text-white text-sm md:text-base rounded-full font-bold hover:bg-red-600 transition"
           >
             إعادة المحاولة
           </button>
@@ -64,10 +64,10 @@ export default function Dashboard() {
 
   return (
     <div
-      className="min-h-screen bg-[#FAEFE4] py-16 font-sans text-right"
+      className="min-h-screen bg-[#FAEFE4] px-4 py-8 md:px-12 md:py-16 font-sans text-right"
       dir="rtl"
     >
-      <div className="max-w-279 mx-auto space-y-12">
+      <div className="max-w-[1400px] mx-auto space-y-12 w-full">
         <HeaderBanner
           parentName={data.parentName}
           childName={data.childName}

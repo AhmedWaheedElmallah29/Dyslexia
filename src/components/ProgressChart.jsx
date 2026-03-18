@@ -15,7 +15,7 @@ export default function ProgressChart({ data }) {
       <h2 className="text-[24px] font-bold text-black mb-6">
         تتبع التقدم خلال هذا الأسبوع
       </h2>
-      <div className="h-72 w-full bg-white rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] p-8">
+      <div className="h-[300px] md:h-[400px] w-full bg-white rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] p-4 md:p-8">
         <ResponsiveContainer
           width="100%"
           height="100%"
@@ -34,20 +34,38 @@ export default function ProgressChart({ data }) {
 
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 20, fill: "#000", fontWeight: 500 }}
+              tick={(props) => (
+                <text
+                  x={props.x}
+                  y={props.y}
+                  dy={16}
+                  textAnchor="middle"
+                  className="fill-black font-medium text-[12px] md:text-[20px]"
+                >
+                  {props.payload.value}
+                </text>
+              )}
               axisLine={false}
               tickLine={false}
               padding={{ left: 30, right: 4 }}
             />
 
             <YAxis
-              tick={{ fontSize: 20, fill: "#000" }}
+              tick={(props) => (
+                <text
+                  x={props.x}
+                  y={props.y}
+                  dx={-15}
+                  textAnchor="end"
+                  className="fill-black text-[12px] md:text-[20px]"
+                >
+                  {`${props.payload.value}%`}
+                </text>
+              )}
               axisLine={false}
               tickLine={false}
               domain={[0, 100]}
-              tickMargin={15}
-              width={10}
-              tickFormatter={(value) => `${value}%`}
+              width={50}
             />
 
             <Tooltip
@@ -61,7 +79,14 @@ export default function ProgressChart({ data }) {
               formatter={(value, name) => [`${value}%`, name]}
             />
 
-            <Legend verticalAlign="top" height={40} iconType="circle" />
+            <Legend 
+              verticalAlign="top" 
+              height={40} 
+              iconType="circle" 
+              formatter={(value) => (
+                <span className="text-sm md:text-base text-black mr-2 font-medium">{value}</span>
+              )}
+            />
 
             <Line
               type="monotone"

@@ -20,7 +20,7 @@ export default function RecommendedActivities({ activities }) {
       <h2 className="text-[24px] font-bold text-black mb-6">
         الأنشطة الموصى بها
       </h2>
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row md:overflow-x-auto gap-4 md:gap-6 pb-4 md:pb-0">
         {/* بنلف على الأنشطة اللي الباك إند بعتها ونرسمها */}
         {activities &&
           activities.map((activity) => {
@@ -29,12 +29,12 @@ export default function RecommendedActivities({ activities }) {
             return (
               <button
                 key={activity.id}
-                className="flex-1 h-23.25 bg-[#E1F1FF] border border-[#6E9CFF] rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-center gap-4 hover:bg-blue-100 transition duration-300 hover:-translate-y-1"
+                className="flex-1 h-20 md:h-23.25 min-w-[200px] shrink-0 bg-[#E1F1FF] border border-[#6E9CFF] rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-center gap-4 hover:bg-blue-100 transition duration-300 hover:-translate-y-1"
               >
                 {/* رسمنا الأيقونة */}
-                <IconComponent className="w-10.25 h-10.25 text-black" />
+                <IconComponent className="w-8 h-8 md:w-10.25 md:h-10.25 text-black" />
                 {/* رسمنا النص اللي جاي من الباك إند زي ما هو */}
-                <span className="text-[24px] font-medium text-black">
+                <span className="text-xl md:text-[24px] font-medium text-black">
                   {activity.text}
                 </span>
               </button>
