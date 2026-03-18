@@ -32,7 +32,7 @@ export default function StatCard({ title, percentage }) {
 
   return (
     <div
-      className={`h-auto min-h-[160px] md:h-54.5 p-4 md:p-6 rounded-[30px] border flex flex-col items-center justify-between gap-4 ${bgColor} ${borderColor} shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
+      className={`h-auto min-h-40 md:h-54.5 p-4 md:p-6 rounded-[30px] border flex flex-col items-center justify-between gap-4 ${bgColor} ${borderColor} shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
     >
       <h3 className="text-xl md:text-2xl font-bold text-black mt-2">{title}</h3>
       <div className="w-full bg-[#E5E7EB] rounded-full h-4 relative">
