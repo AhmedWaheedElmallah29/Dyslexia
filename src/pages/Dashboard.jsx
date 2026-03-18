@@ -67,7 +67,7 @@ export default function Dashboard() {
       className="min-h-screen bg-[#FAEFE4] px-4 py-8 md:px-12 md:py-16 font-sans text-right"
       dir="rtl"
     >
-      <div className="max-w-[1400px] mx-auto space-y-12 w-full">
+      <div className="max-w-350 mx-auto space-y-12 w-full">
         <HeaderBanner
           parentName={data.parentName}
           childName={data.childName}

@@ -77,7 +77,9 @@ export const mockData = {
   childName: childName,
   age: 6,
   lastEvaluation: "1 مارس 2026",
+
   chartData: historicalData,
+
   stats: {
     reading: {
       title: "مستوى القراءة",
@@ -89,10 +91,13 @@ export const mockData = {
     },
     focus: { title: "مستوى التركيز", percentage: averages.focus.toFixed(0) },
   },
+
   activities: [
     { id: 1, type: "writing", text: "تمرين كتابة حرف ب" },
     { id: 2, type: "listening", text: "تمرين استماع ونطق لحرف أ" },
   ],
+
   lettersToPractice: latestEvaluation.weakLetters,
-  alerts: generateDynamicAlerts(latestEvaluation, childName),
+
+  alerts: generateDynamicAlerts(averages, childName),
 };

@@ -1,29 +1,27 @@
 import { Bell, AlertCircle, CheckCircle } from "lucide-react";
 
 export default function AlertsSection({ alerts }) {
-  // 1. حالة الـ Empty State: لو مفيش تنبيهات خالص، الكومبوننت هيختفي أو يعرض رسالة إيجابية
   if (!alerts || alerts.length === 0) {
-    return null; // ممكن نغيرها لكارت أخضر بيقول "كل شيء على ما يرام"
+    return null;
   }
 
-  // 2. الفلتر الذكي: بياخد "نوع" التنبيه ويرجع الأيقونة والألوان المناسبة
   const getAlertConfig = (type) => {
     switch (type) {
-      case "info": // للتنبيهات العادية زي وقت التدريب
+      case "info":
         return {
           bg: "bg-[#E1F1FF]",
           border: "border-[#6E9CFF]",
           text: "text-[#001EFF]",
           Icon: Bell,
         };
-      case "warning": // للتحذيرات زي تراجع المستوى
+      case "warning":
         return {
           bg: "bg-[#FEF2F2]",
           border: "border-[#FB2C36]",
           text: "text-[#FB2C36]",
           Icon: AlertCircle,
         };
-      case "success": // إضافة من عندنا لو حبيت تبعت رسالة تشجيع
+      case "success":
         return {
           bg: "bg-[#F0FDF4]",
           border: "border-[#00C950]",
@@ -44,17 +42,20 @@ export default function AlertsSection({ alerts }) {
     <div>
       <h2 className="text-[24px] font-bold text-black mb-6">تنبيهات مهمة</h2>
       <div className="space-y-6">
-        {/* 3. الدوران على المصفوفة لرسم التنبيهات أياً كان عددها */}
         {alerts.map((alert, index) => {
           const { bg, border, text, Icon } = getAlertConfig(alert.type);
 
           return (
             <div
               key={index}
-              className={`min-h-[93px] py-4 md:py-0 md:h-23.25 ${bg} border ${border} rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center px-6 md:px-8 gap-4 transition-transform duration-300 hover:scale-[1.01]`}
+              className={`min-h-23.25 py-4 md:py-0 md:h-23.25 ${bg} border ${border} rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center px-6 md:px-8 gap-4 transition-transform duration-300 hover:scale-[1.01]`}
             >
-              <Icon className={`w-8 h-8 shrink-0 md:w-8.75 md:h-8.75 ${text}`} />
-              <span className={`text-lg md:text-[24px] font-medium leading-tight ${text}`}>
+              <Icon
+                className={`w-8 h-8 shrink-0 md:w-8.75 md:h-8.75 ${text}`}
+              />
+              <span
+                className={`text-lg md:text-[24px] font-medium leading-tight ${text}`}
+              >
                 {alert.message}
               </span>
             </div>
