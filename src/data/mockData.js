@@ -22,50 +22,54 @@ const historicalData = [
   },
 ];
 
-const latestEvaluation = historicalData[historicalData.length - 1];
+const count = historicalData.length;
+
+const totals = historicalData.reduce(
+  (acc, curr) => ({
+    reading: acc.reading + curr.reading,
+    writing: acc.writing + curr.writing,
+    focus: acc.focus + curr.focus,
+  }),
+  { reading: 0, writing: 0, focus: 0 },
+);
+
+const averages = {
+  reading: totals.reading / count,
+  writing: totals.writing / count,
+  focus: totals.focus / count,
+};
+
+const latestEvaluation = historicalData[count - 1];
 const childName = "عمر";
 
 const generateDynamicAlerts = (evaluation, name) => {
-  const generatedAlerts = [];
+  const alerts = [
+    { type: "info", message: `يحتاج ${name} إلى 15 دقيقة تدريب يوميًا 💙` },
+  ];
 
-  generatedAlerts.push({
-    type: "info",
-    message: `يحتاج ${name} إلى 15 دقيقة تدريب يوميًا 💙`,
+  const categories = [
+    { key: "writing", label: "الكتابة" },
+    { key: "reading", label: "القراءة" },
+    { key: "focus", label: "التركيز" },
+  ];
+
+  categories.forEach((cat) => {
+    if (evaluation[cat.key] < 50) {
+      alerts.push({
+        type: "warning",
+        message: `مستوى ${cat.label} يحتاج إلى مزيد من الدعم والتحسين.`,
+      });
+    }
   });
 
-  if (evaluation.writing < 50) {
-    generatedAlerts.push({
-      type: "warning",
-      message: "مستوى الكتابة يحتاج إلى مزيد من الدعم والتحسين.",
-    });
-  }
-
-  if (evaluation.reading < 50) {
-    generatedAlerts.push({
-      type: "warning",
-      message: "مستوى القراءة يحتاج إلى مزيد من الدعم والتحسين.",
-    });
-  }
-
-  if (evaluation.focus < 50) {
-    generatedAlerts.push({
-      type: "warning",
-      message: "مستوى التركيز يحتاج إلى مزيد من الدعم والتحسين.",
-    });
-  }
-
-  if (
-    evaluation.writing >= 50 &&
-    evaluation.reading >= 50 &&
-    evaluation.focus >= 50
-  ) {
-    generatedAlerts.push({
+  if (categories.every((cat) => evaluation[cat.key] >= 50)) {
+    alerts.push({
       type: "success",
       message: `أداء ${name} ممتاز هذا الأسبوع! استمروا على هذا المجهود الرائع 🌟`,
     });
   }
 
-  return generatedAlerts;
+  return alerts;
 };
 
 export const mockData = {
@@ -73,20 +77,22 @@ export const mockData = {
   childName: childName,
   age: 6,
   lastEvaluation: "1 مارس 2026",
-
   chartData: historicalData,
-
   stats: {
-    reading: { title: "مستوى القراءة", percentage: latestEvaluation.reading },
-    writing: { title: "مستوى الكتابة", percentage: latestEvaluation.writing },
-    focus: { title: "مستوى التركيز", percentage: latestEvaluation.focus },
+    reading: {
+      title: "مستوى القراءة",
+      percentage: averages.reading.toFixed(0),
+    },
+    writing: {
+      title: "مستوى الكتابة",
+      percentage: averages.writing.toFixed(0),
+    },
+    focus: { title: "مستوى التركيز", percentage: averages.focus.toFixed(0) },
   },
   activities: [
     { id: 1, type: "writing", text: "تمرين كتابة حرف ب" },
     { id: 2, type: "listening", text: "تمرين استماع ونطق لحرف أ" },
   ],
-
   lettersToPractice: latestEvaluation.weakLetters,
-
   alerts: generateDynamicAlerts(latestEvaluation, childName),
 };
