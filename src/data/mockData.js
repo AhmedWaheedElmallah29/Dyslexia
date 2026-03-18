@@ -15,9 +15,9 @@ const historicalData = [
   },
   {
     name: "آخر تقييم",
-    reading: 80,
-    writing: 80,
-    focus: 80,
+    reading: 70,
+    writing: 70,
+    focus: 90,
     weakLetters: ["ب", "ع"],
   },
 ];

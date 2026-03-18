@@ -14,13 +14,13 @@ export default function LettersPractice({ letters }) {
           </span>
         </div>
       ) : (
-        <div className="flex justify-between gap-6">
+        <div className="grid grid-cols-4 gap-6">
           {safeLetters.map((letter) => (
             <div
               key={letter}
-              className="w-65.25 h-44.5 bg-white rounded-[30px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex items-center justify-center text-[48px] font-bold text-black transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg "
+              className="bg-white rounded-[30px] shadow-[0_4px_10px_rgba(0,0,0,0.05)] border border-gray-100 h-44.5 flex items-center justify-center transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg "
             >
-              {letter}
+              <div className="text-[96px] font-bold text-black">{letter}</div>
             </div>
           ))}
         </div>

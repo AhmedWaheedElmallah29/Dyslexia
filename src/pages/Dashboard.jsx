@@ -6,24 +6,21 @@ import LettersPractice from "../components/LettersPractice";
 import AlertsSection from "../components/AlertsSection";
 import RecommendedActivities from "../components/RecommendedActivities";
 import FooterBanner from "../components/FooterBanner";
-import LoadingScreen from "../components/LoadingScreen"; // استدعينا الكومبوننت بتاعك
+import LoadingScreen from "../components/LoadingScreen";
 import { mockData } from "../data/mockData";
 import { AlertTriangle } from "lucide-react";
 
 export default function Dashboard() {
-  // تعريف الحالات (Loading, Error, Data)
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // محاكاة جلب البيانات
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        // محاكاة تحميل لمدة ثانيتين
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         setData(mockData);
@@ -37,12 +34,10 @@ export default function Dashboard() {
     fetchDashboardData();
   }, []);
 
-  // 1. حالة التحميل: بنعرض الكومبوننت المفصول
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  // 2. حالة الخطأ: كارت شيك بنفس ألوان الثيم بتاعك عشان لو النت فصل
   if (error) {
     return (
       <div
@@ -66,10 +61,8 @@ export default function Dashboard() {
     );
   }
 
-  // أمان إضافي
   if (!data) return null;
 
-  // 3. حالة النجاح: الكود بتاعك والتنسيق بتاعك بالملي ومفيش فيه أي تغيير
   return (
     <div
       className="min-h-screen bg-[#FAEFE4] py-16 font-sans text-right"
