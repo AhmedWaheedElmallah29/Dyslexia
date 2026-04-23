@@ -51,18 +51,34 @@ export default function Dashboard() {
         const apiData = response.data.data;
 
         const formattedData = {
-          parentEmail: apiData.parentEmail,
+          parentEmail: apiData.parentEmail.split("@")[0],
           childName: apiData.childName,
           age: apiData.age,
           lastEvaluation: apiData.lastEvaluation,
           stats: {
-            reading: apiData.stats.reading,
-            writing: apiData.stats.writing,
-            focus: apiData.stats.listening,
+            reading: {
+              ...apiData.stats.reading,
+              title: "القراءة",
+              label: "القراءة",
+            },
+            writing: {
+              ...apiData.stats.writing,
+              title: "الكتابة",
+              label: "الكتابة",
+            },
+            focus: {
+              ...apiData.stats.listening,
+              title: "التركيز",
+              label: "التركيز",
+            },
           },
           chartData: apiData.chartData,
           lettersToPractice: apiData.lettersToPractice,
-          alerts: apiData.alerts,
+          alerts: apiData.alerts.map((alert) => ({
+            ...alert,
+            message: alert.text,
+            title: alert.text,
+          })),
           activities: apiData.activities,
         };
 

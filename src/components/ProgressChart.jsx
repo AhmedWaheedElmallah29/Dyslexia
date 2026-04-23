@@ -33,7 +33,7 @@ export default function ProgressChart({ data }) {
             />
 
             <XAxis
-              dataKey="name"
+              dataKey="evaluationName"
               tick={(props) => (
                 <text
                   x={props.x}
