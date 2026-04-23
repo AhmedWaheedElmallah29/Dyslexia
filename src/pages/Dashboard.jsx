@@ -48,7 +48,25 @@ export default function Dashboard() {
           },
         );
 
-        setData(response.data.data);
+        const apiData = response.data.data;
+
+        const formattedData = {
+          parentEmail: apiData.parentEmail,
+          childName: apiData.childName,
+          age: apiData.age,
+          lastEvaluation: apiData.lastEvaluation,
+          stats: {
+            reading: apiData.stats.reading,
+            writing: apiData.stats.writing,
+            focus: apiData.stats.listening,
+          },
+          chartData: apiData.chartData,
+          lettersToPractice: apiData.lettersToPractice,
+          alerts: apiData.alerts,
+          activities: apiData.activities,
+        };
+
+        setData(formattedData);
       } catch (err) {
         console.error("API Error:", err);
         setError(
