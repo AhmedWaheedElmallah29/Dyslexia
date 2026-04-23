@@ -48,7 +48,7 @@ export default function Dashboard() {
           },
         );
 
-        setData(response.data);
+        setData(response.data.data);
       } catch (err) {
         console.error("API Error:", err);
         setError(
@@ -108,7 +108,7 @@ export default function Dashboard() {
         </div>
 
         <HeaderBanner
-          parentName={data.parentName}
+          parentName={data.parentEmail}
           childName={data.childName}
           age={data.age}
           lastEvaluation={data.lastEvaluation}
