@@ -24,7 +24,7 @@ export default function StatCard({ title, percentage, status }) {
     }
   };
 
-  const { status, bgColor, borderColor, textColor, barColor } =
+  const { bgColor, borderColor, textColor, barColor } =
     getCardStyle(percentage);
 
   return (
