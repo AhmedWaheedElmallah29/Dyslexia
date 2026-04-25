@@ -1,8 +1,7 @@
-export default function StatCard({ title, percentage }) {
+export default function StatCard({ title, percentage, status }) {
   const getCardStyle = (percent) => {
     if (percent >= 70) {
       return {
-        status: "جيد",
         bgColor: "bg-[#F0FDF4]",
         borderColor: "border-[#00C950]",
         textColor: "text-[#00C950]",
@@ -10,7 +9,6 @@ export default function StatCard({ title, percentage }) {
       };
     } else if (percent >= 50) {
       return {
-        status: "متوسط",
         bgColor: "bg-[#FEFCE8]",
         borderColor: "border-[#F0B100]",
         textColor: "text-[#FA9927]",
@@ -18,7 +16,6 @@ export default function StatCard({ title, percentage }) {
       };
     } else {
       return {
-        status: "يحتاج دعم",
         bgColor: "bg-[#FEF2F2]",
         borderColor: "border-[#FB2C36]",
         textColor: "text-[#FB2C36]",
