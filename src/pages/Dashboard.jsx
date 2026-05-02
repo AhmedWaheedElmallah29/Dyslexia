@@ -12,6 +12,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { AlertTriangle } from "lucide-react";
 
 export default function Dashboard() {
+  const [hasNoData, setHasNoData] = useState(false);
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,6 +50,12 @@ export default function Dashboard() {
         );
 
         const apiData = response.data.data;
+
+        if (apiData.message === "No data yet") {
+          setHasNoData(true);
+          setIsLoading(false);
+          return;
+        }
 
         const formattedData = {
           parentEmail: apiData.parentEmail.split("@")[0],
@@ -109,7 +116,7 @@ export default function Dashboard() {
         dir="rtl"
       >
         <div className="w-full max-w-[90%] md:max-w-lg bg-[#FEF2F2] p-6 md:p-8 rounded-[30px] border border-[#FB2C36] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-col items-center text-center">
-          <AlertTriangle className="w-12 h-12 md:w-16 md:h-16 text-[#FB2C36] mb-4" />
+          <AlertTriangle className="w-12 h-12 md:w-16 h-16 text-[#FB2C36] mb-4" />
           <h2 className="text-xl md:text-[24px] font-bold text-[#FB2C36] mb-2 ">
             عذراً، فشل التحميل!
           </h2>
@@ -125,7 +132,7 @@ export default function Dashboard() {
     );
   }
 
-  if (!data) return null;
+  if (!data && !hasNoData) return null;
 
   return (
     <div
@@ -141,19 +148,36 @@ export default function Dashboard() {
           />
         </div>
 
-        <HeaderBanner
-          parentName={data.parentEmail}
-          childName={data.childName}
-          age={data.age}
-          lastEvaluation={data.lastEvaluation}
-        />
+        {hasNoData ? (
+          <div className="flex flex-col items-center justify-center mt-10 md:mt-20 p-8 md:p-12 bg-white rounded-[30px] border border-[#E5E7EB] shadow-[0_4px_4px_rgba(0,0,0,0.05)] text-center">
+            <div className="w-24 h-24 mb-6 bg-[#FAEFE4] rounded-full flex items-center justify-center text-4xl">
+              🌱
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
+              مرحباً بكِ في رحلة التطور!
+            </h2>
+            <p className="text-gray-500 text-lg md:text-xl max-w-2xl leading-relaxed">
+              لم نقم بتسجيل أي تقييمات أو تدريبات لبطلنا حتى الآن. قم بإجراء
+              التقييم الأول من تطبيق الموبايل لتظهر لك الإحصائيات والنتائج هنا.
+            </p>
+          </div>
+        ) : (
+          <>
+            <HeaderBanner
+              parentName={data.parentEmail}
+              childName={data.childName}
+              age={data.age}
+              lastEvaluation={data.lastEvaluation}
+            />
 
-        <StatsOverview stats={data.stats} />
-        <ProgressChart data={data.chartData} />
-        <LettersPractice letters={data.lettersToPractice} />
-        <AlertsSection alerts={data.alerts} />
-        <RecommendedActivities activities={data.activities} />
-        <FooterBanner />
+            <StatsOverview stats={data.stats} />
+            <ProgressChart data={data.chartData} />
+            <LettersPractice letters={data.lettersToPractice} />
+            <AlertsSection alerts={data.alerts} />
+            <RecommendedActivities activities={data.activities} />
+            <FooterBanner />
+          </>
+        )}
       </div>
     </div>
   );
