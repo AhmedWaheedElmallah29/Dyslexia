@@ -41,7 +41,7 @@ export default function Dashboard() {
         }
 
         const response = await axios.get(
-          `https://deslexia-desgraphia-production.up.railway.app/submissions/report/${childId}`,
+          `https://deslexia-desgraphia-production-1e86.up.railway.app/submissions/report/${childId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
