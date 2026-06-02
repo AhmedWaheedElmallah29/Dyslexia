@@ -108,8 +108,8 @@ export default function ProgressChart({ data }) {
             />
             <Line
               type="monotone"
-              dataKey="focus"
-              name="التركيز"
+              dataKey="performance"
+              name="الأداء"
               stroke="#FA9927"
               strokeWidth={4}
               dot={{ r: 6 }}

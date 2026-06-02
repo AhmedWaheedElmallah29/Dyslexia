@@ -14,6 +14,7 @@ import { AlertTriangle } from "lucide-react";
 export default function Dashboard() {
   const [hasNoData, setHasNoData] = useState(false);
   const [data, setData] = useState(null);
+  const [childName, setChildName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -49,49 +50,78 @@ export default function Dashboard() {
           },
         );
 
-        const apiData = response.data.data;
+        const responseData = response.data.data || response.data;
 
-        if (apiData.message === "No data yet") {
+        if (responseData && responseData.childName) {
+          setChildName(responseData.childName);
+        }
+
+        if (
+          responseData.hasData === false ||
+          responseData.message === "لم يقم الطفل بأي تمرين بعد" ||
+          responseData.message === "No data yet"
+        ) {
           setHasNoData(true);
           setIsLoading(false);
           return;
         }
 
         const formattedData = {
-          parentEmail: apiData.parentEmail.split("@")[0],
-          childName: apiData.childName,
-          age: apiData.age,
-          lastEvaluation: apiData.lastEvaluation,
+          parentEmail: responseData.parentEmail
+            ? responseData.parentEmail.split("@")[0]
+            : "",
+          childName: responseData.childName || "",
+          age: responseData.age || "",
+          lastEvaluation: responseData.lastEvaluation || "",
           stats: {
             reading: {
-              ...apiData.stats.reading,
+              ...(responseData.stats?.reading || {}),
               title: "القراءة",
               label: "القراءة",
+              improvement: responseData.readingImprovement || {
+                difference: 0,
+                trend: "stable",
+              },
             },
             writing: {
-              ...apiData.stats.writing,
+              ...(responseData.stats?.writing || {}),
               title: "الكتابة",
               label: "الكتابة",
+              improvement: responseData.writingImprovement || {
+                difference: 0,
+                trend: "stable",
+              },
             },
-            focus: {
-              ...apiData.stats.listening,
-              title: "التركيز",
-              label: "التركيز",
+            performance: {
+              ...(responseData.stats?.performance || {}),
+              title: "الأداء",
+              label: "الأداء",
             },
           },
-          chartData: apiData.chartData,
-          lettersToPractice: apiData.lettersToPractice,
-          alerts: apiData.alerts.map((alert) => ({
+          chartData: responseData.chartData || [],
+          lettersToPractice: responseData.lettersToPractice || [],
+          alerts: (responseData.alerts || []).map((alert) => ({
             ...alert,
-            message: alert.text,
-            title: alert.text,
+            message: alert.text || "",
+            title: alert.text || "",
           })),
-          activities: apiData.activities,
+          activities: responseData.activities || [],
         };
 
         setData(formattedData);
       } catch (err) {
         console.error("API Error:", err);
+
+        const errorResponse = err.response?.data;
+        if (
+          errorResponse?.hasData === false ||
+          errorResponse?.message === "لم يقم الطفل بأي تمرين بعد"
+        ) {
+          setHasNoData(true);
+          setIsLoading(false);
+          return;
+        }
+
         setError(
           err.response?.data?.message ||
             err.message ||
@@ -154,7 +184,8 @@ export default function Dashboard() {
               🌱
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
-              مرحباً بكِ في رحلة التطور!
+              مرحباً بكِ يا أم {childName || "البطل"} في رحلة تقدّم{" "}
+              {childName || "البطل"} 🌱
             </h2>
             <p className="text-gray-500 text-lg md:text-xl max-w-2xl leading-relaxed">
               لم نقم بتسجيل أي تقييمات أو تدريبات لبطلنا حتى الآن. قم بإجراء
