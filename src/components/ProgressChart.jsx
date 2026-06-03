@@ -117,8 +117,8 @@ export default function ProgressChart({ data }) {
               stroke="#F59E0B"
               strokeWidth={3}
               strokeDasharray="8 8"
-              dot={{ r: 4, strokeWidth: 2 }}
-              activeDot={{ r: 6 }}
+              dot={{ r: 4, strokeWidth: 2, strokeDasharray: "0" }}
+              activeDot={{ r: 6, strokeDasharray: "0" }}
             />
           </LineChart>
         </ResponsiveContainer>
