@@ -117,6 +117,9 @@ export default function Dashboard() {
           errorResponse?.hasData === false ||
           errorResponse?.message === "لم يقم الطفل بأي تمرين بعد"
         ) {
+          if (errorResponse.childName) {
+            setChildName(errorResponse.childName);
+          }
           setHasNoData(true);
           setIsLoading(false);
           return;
