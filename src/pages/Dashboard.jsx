@@ -98,6 +98,7 @@ export default function Dashboard() {
               label: "الأداء",
             },
           },
+
           chartData: responseData.chartData || [],
           lettersToPractice: responseData.lettersToPractice || [],
           alerts: (responseData.alerts || []).map((alert) => ({

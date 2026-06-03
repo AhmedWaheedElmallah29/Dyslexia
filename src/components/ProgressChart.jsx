@@ -96,8 +96,8 @@ export default function ProgressChart({ data }) {
               name="القراءة"
               stroke="#10B981"
               strokeWidth={3}
-              dot={{ r: 5 }}
-              activeDot={{ r: 7 }}
+              dot={{ r: 7, strokeWidth: 2 }}
+              activeDot={{ r: 9 }}
             />
 
             <Line
@@ -116,9 +116,8 @@ export default function ProgressChart({ data }) {
               name="الأداء"
               stroke="#F59E0B"
               strokeWidth={3}
-              strokeDasharray="8 8"
-              dot={{ r: 4, strokeWidth: 2, strokeDasharray: "0" }}
-              activeDot={{ r: 6, strokeDasharray: "0" }}
+              dot={{ r: 7, strokeWidth: 2 }}
+              activeDot={{ r: 9 }}
             />
           </LineChart>
         </ResponsiveContainer>
