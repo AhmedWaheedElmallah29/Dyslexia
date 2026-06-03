@@ -94,25 +94,31 @@ export default function ProgressChart({ data }) {
               type="monotone"
               dataKey="reading"
               name="القراءة"
-              stroke="#00C950"
-              strokeWidth={4}
-              dot={{ r: 6 }}
+              stroke="#10B981"
+              strokeWidth={3}
+              dot={{ r: 5 }}
+              activeDot={{ r: 7 }}
             />
+
             <Line
               type="monotone"
               dataKey="writing"
               name="الكتابة"
-              stroke="#FB2C36"
-              strokeWidth={4}
-              dot={{ r: 6 }}
+              stroke="#EF4444"
+              strokeWidth={3}
+              dot={{ r: 7, strokeWidth: 2 }}
+              activeDot={{ r: 9 }}
             />
+
             <Line
               type="monotone"
               dataKey="performance"
               name="الأداء"
-              stroke="#FA9927"
-              strokeWidth={4}
-              dot={{ r: 6 }}
+              stroke="#F59E0B"
+              strokeWidth={3}
+              strokeDasharray="8 8"
+              dot={{ r: 4, strokeWidth: 2 }}
+              activeDot={{ r: 6 }}
             />
           </LineChart>
         </ResponsiveContainer>
