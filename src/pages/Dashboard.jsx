@@ -73,6 +73,31 @@ export default function Dashboard() {
           childName: responseData.childName || "",
           age: responseData.age || "",
           lastEvaluation: responseData.lastEvaluation || "",
+          // stats: {
+          //   reading: {
+          //     ...(responseData.stats?.reading || {}),
+          //     title: "القراءة",
+          //     label: "القراءة",
+          //     improvement: responseData.readingImprovement || {
+          //       difference: 0,
+          //       trend: "stable",
+          //     },
+          //   },
+          //   writing: {
+          //     ...(responseData.stats?.writing || {}),
+          //     title: "الكتابة",
+          //     label: "الكتابة",
+          //     improvement: responseData.writingImprovement || {
+          //       difference: 0,
+          //       trend: "stable",
+          //     },
+          //   },
+          //   performance: {
+          //     ...(responseData.stats?.performance || {}),
+          //     title: "الأداء",
+          //     label: "الأداء",
+          //   },
+          // },
           stats: {
             reading: {
               ...(responseData.stats?.reading || {}),
@@ -96,9 +121,12 @@ export default function Dashboard() {
               ...(responseData.stats?.performance || {}),
               title: "الأداء",
               label: "الأداء",
+              improvement: responseData.performanceImprovement || {
+                difference: 0,
+                trend: "stable",
+              },
             },
           },
-
           chartData: responseData.chartData || [],
           lettersToPractice: responseData.lettersToPractice || [],
           alerts: (responseData.alerts || []).map((alert) => ({
