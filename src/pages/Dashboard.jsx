@@ -203,7 +203,6 @@ export default function Dashboard() {
         ) : (
           <>
             <HeaderBanner
-              parentName={data.parentEmail}
               childName={data.childName}
               age={data.age}
               lastEvaluation={data.lastEvaluation}
