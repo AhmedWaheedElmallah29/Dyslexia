@@ -1,6 +1,6 @@
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
-export default function StatCard({ title, percentage, status, improvement }) {
+export default function StatCard({ title, percentage, status }) {
   const getCardStyle = (percent) => {
     if (percent >= 70) {
       return {
@@ -45,27 +45,6 @@ export default function StatCard({ title, percentage, status, improvement }) {
       >
         <div className="flex items-center gap-2">
           <span>{percentage}%</span>
-          {improvement && (
-            <span
-              className={`text-sm md:text-base flex items-center gap-1 font-bold ${
-                improvement.trend === "improved"
-                  ? "text-green-600"
-                  : improvement.trend === "declined"
-                    ? "text-red-600"
-                    : "text-gray-400"
-              }`}
-              dir="ltr"
-            >
-              {improvement.trend === "improved" && <TrendingUp size={18} />}
-              {improvement.trend === "declined" && <TrendingDown size={18} />}
-              {improvement.trend === "stable" && <Minus size={18} />}
-              <span>
-                {improvement.trend === "improved" ? "+" : ""}
-                {improvement.trend === "declined" ? "-" : ""}
-                {Math.abs(improvement.difference)}%
-              </span>
-            </span>
-          )}
         </div>
         <span>{status}</span>
       </div>
